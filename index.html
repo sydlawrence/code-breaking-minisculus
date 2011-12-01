@@ -1,0 +1,83 @@
+<pre id="log"></pre>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script type="text/javascript" src="tools.js"></script>
+<script type="text/javascript" src="machine.js"></script>
+<script type="text/javascript" src="question.js"></script>
+<script type="text/javascript" src="tests.js"></script>
+
+<script type="text/javascript">
+
+questions = [
+  {
+    url: "14f7ca5f6ff1a5afb9032aa5e533ad95",
+    code: "Strong NE Winds!",
+    wheels: [6]
+  },
+  {
+    url: "2077f244def8a70e5ea758bd8352fcd8",
+    code: "The Desert Fox will move 30 tanks to Calais at dawn",
+    wheels: [9,3]
+  },
+  {
+    url: "36d80eb0c50b49a509b49f2424e8c805",
+    code: "The white cliffs of Alghero are visible at night",
+    wheels: [4,7,true]
+  },
+  {
+    url: "4baecf8ca3f98dc13eeecbac263cd3ed",
+    code: "WZyDsL3u'0TfxP06RtSSF 'DbzhdyFIAu2 zF f5KE\"SOQTNA8A\"NCKPOKG5D9GSQE'M86IGFMKE6'K4pEVPK!bv83I",
+    wheels: [7,2,true],
+    decode: true,
+  },
+  {
+    url: "50763edaa9d9bd2a9516280e9044d885",
+    code: "QT4e8MJYVhkls.27BL9,.MSqYSi'IUpAJKWg9Ul9p4o8oUoGy'ITd4d0AJVsLQp4kKJB2rz4dxfahwUa\"Wa.MS!k4hs2yY3k8ymnla.MOTxJ6wBM7sC0srXmyAAMl9t\"Wk4hs2yYTtH0vwUZp4a\"WhB2u,o6.!8Zt\"Wf,,eh5tk8WXv9UoM99w2Vr4!.xqA,5MSpWl9p4kJ2oUg'6evkEiQhC'd5d4k0qA'24nEqhtAQmy37il9p4o8vdoVr!xWSkEDn?,iZpw24kF\"fhGJZMI8nkI",
+    clues: [
+      "FURLIN",
+      "BUNKER",
+    ], 
+    found: false,
+    process: function() {
+    
+      for (i = 0;i<2;i++) { // 3rd wheel on / off
+      
+        for (j=0;j<9;j++) { // 1st wheel 0 -> 9
+        
+          for (k=0;k<9;k++) { // 2nd wheel 0 -> 9
+          
+            machine.setWheels([j,k,i]);
+            this.answer = machine.decode(this.code);
+            
+            // if in string
+            var found = true;
+            for (var key = 0;key<this.clues.length;key++) {
+              if (this.answer.indexOf(this.clues[key],0) === -1) {                  
+                found = false;
+                break;
+              }
+            }
+            
+            if (found) {
+            
+              log("w00p w00p, that was fun");
+              log(this.answer);
+              
+              return; // no point continuing
+            }
+                          
+          } // end 2nd wheel
+          
+        } // end 1st wheel
+        
+      } // end 3rd wheel
+      
+    }
+  }
+];
+
+test();
+nextQuestion();
+
+</script>
+
