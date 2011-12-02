@@ -54,6 +54,7 @@ questions = [
             for (var key = 0;key<this.clues.length;key++) {
               if (this.answer.indexOf(this.clues[key],0) === -1) {                  
                 found = false;
+                //log("error: "+this.answer);
                 break;
               }
             }
@@ -63,7 +64,7 @@ questions = [
               log("w00p w00p, that was fun");
               log(this.answer);
               
-              return; // no point continuing
+              //return; // no point continuing
             }
                           
           } // end 2nd wheel
