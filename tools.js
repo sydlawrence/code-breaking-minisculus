@@ -1,5 +1,5 @@
 app = {
-  base_url: "http://minisculus.edendevelopment.co.uk/",
+  base_url: "http://minisculuschallenge.com/",
   build_url: function(url) {
     return app.base_url + url;
   },
